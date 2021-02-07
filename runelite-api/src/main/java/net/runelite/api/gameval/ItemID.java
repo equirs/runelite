@@ -13413,7 +13413,7 @@ public final class ItemID
 	public static final int WAA_STICK = 4179;
 
 	/**
-	 * Dragon platelegs
+	 * Dragon platelegs4500
 	 */
 	public static final int CERT_WAA_STICK = 4180;
 
