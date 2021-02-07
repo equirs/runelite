@@ -40,6 +40,7 @@ import net.runelite.cache.fs.Store;
 public class TextureManager implements TextureProvider
 {
 	private final Store store;
+	// TODO why isn't this a map
 	private final List<TextureDefinition> textures = new ArrayList<>();
 
 	public TextureManager(Store store)
