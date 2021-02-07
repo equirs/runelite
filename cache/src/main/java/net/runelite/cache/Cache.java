@@ -45,6 +45,8 @@ public class Cache
 		options.addOption(null, "npcs", true, "directory to dump npcs to");
 		options.addOption(null, "objects", true, "directory to dump objects to");
 		options.addOption(null, "sprites", true, "directory to dump sprites to");
+		options.addOption(null, "itemcolors", true, "directory to dump item equipment colors to");
+		options.addOption(null, "slots", true, "directory to dump item slot data to");
 
 		CommandLineParser parser = new DefaultParser();
 		CommandLine cmd;
@@ -115,6 +117,32 @@ public class Cache
 			System.out.println("Dumping sprites to " + spritedir);
 			dumpSprites(store, new File(spritedir));
 		}
+		else if (cmd.hasOption("itemcolors"))
+		{
+			String itemcolorsdir = cmd.getOptionValue("itemcolors");
+
+			if (itemcolorsdir == null)
+			{
+				System.err.println("Item colors directory must be specified");
+				return;
+			}
+
+			System.out.println("Dumping item colors to " + itemcolorsdir);
+			dumpItemColors(store, new File(itemcolorsdir));
+		}
+		else if (cmd.hasOption("slots"))
+		{
+			String itemslotsdir = cmd.getOptionValue("slots");
+
+			if (itemslotsdir == null)
+			{
+				System.err.println("Item slots directory must be specified");
+				return;
+			}
+
+			System.out.println("Dumping item slots to " + itemslotsdir);
+			dumpItemSlots(store, new File(itemslotsdir));
+		}
 		else
 		{
 			System.err.println("Nothing to do");
@@ -158,4 +186,19 @@ public class Cache
 		dumper.load();
 		dumper.export(spritedir);
 	}
+
+	private static void dumpItemColors(Store store, File colorDir) throws IOException
+	{
+		ColorDataDumper dumper = new ColorDataDumper(store);
+		dumper.load();
+		dumper.export(colorDir);
+	}
+
+	private static void dumpItemSlots(Store store, File colorDir) throws IOException
+	{
+		ItemSlotDumper dumper = new ItemSlotDumper(store);
+		dumper.load();
+		dumper.export(colorDir);
+	}
+
 }
